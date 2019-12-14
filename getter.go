@@ -2,6 +2,7 @@ package sortutil
 
 import (
 	"reflect"
+	"strings"
 )
 
 // A Getter is a function which takes a reflect.Value for a slice, and returns a
@@ -37,6 +38,19 @@ func FieldGetter(name string) Getter {
 		vals := valueSlice(s.Len())
 		for i := range vals {
 			vals[i] = reflect.Indirect(reflect.Indirect(s.Index(i)).FieldByName(name))
+		}
+		return vals
+	}
+}
+
+func FieldGetterFold(name string) Getter {
+	return func(s reflect.Value) []reflect.Value {
+		vals := valueSlice(s.Len())
+		for i := range vals {
+			vals[i] = reflect.Indirect(reflect.Indirect(s.Index(i)).FieldByNameFunc(
+				func(n string) bool {
+					return strings.EqualFold(n, name)
+				}))
 		}
 		return vals
 	}

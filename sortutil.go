@@ -273,9 +273,19 @@ func AscByField(slice interface{}, name string) {
 	New(slice, FieldGetter(name), Ascending).Sort()
 }
 
+// Sort a slice in ascending order by a field name.
+func AscByCiField(slice interface{}, name string) {
+	New(slice, FieldGetterFold(name), Ascending).Sort()
+}
+
 // Sort a slice in descending order by a field name.
 func DescByField(slice interface{}, name string) {
 	New(slice, FieldGetter(name), Descending).Sort()
+}
+
+// Sort a slice in descending order by a field name.
+func DescByCiField(slice interface{}, name string) {
+	New(slice, FieldGetterFold(name), Descending).Sort()
 }
 
 // Sort a slice in case-insensitive ascending order by a field name.
