@@ -47,10 +47,11 @@ func FieldGetterFold(name string) Getter {
 	return func(s reflect.Value) []reflect.Value {
 		vals := valueSlice(s.Len())
 		for i := range vals {
-			vals[i] = reflect.Indirect(reflect.Indirect(s.Index(i)).FieldByNameFunc(
+			v := reflect.Indirect(s.Index(i)).FieldByNameFunc(
 				func(n string) bool {
 					return strings.EqualFold(n, name)
-				}))
+				})
+			vals[i] = reflect.Indirect(v)
 		}
 		return vals
 	}
