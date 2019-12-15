@@ -25,7 +25,12 @@ case-insensitive manner.
 ## Usage
 
 ```Go
-import "sortutil"
+package main
+
+import (
+    "fmt"
+    "github.com/adamvinueza/sortutil"
+)
 
 var (
 	names     = []string{"Adam", "Eric", "Carol", "Bob", "Daniel"}
@@ -33,19 +38,28 @@ var (
 	addresses = []string{"123 Main", "88 Farview", "11 University", "Johnson Lane", "98 Varsity"}
 )
 
-struct Entry {
+type Entry struct {
     Name string
     Age int
     Address string
 }
 
+func NewEntry(name string, age int, addr string) Entry {
+    return Entry{
+        Name: name,
+        Age: age,
+        Address: addr,
+    }
+}
+
 func sortEntriesCaseInsensitive(entries []Entry, name string, order sortutil.Order) {
     if err := sortutil.ByCiField(entries, name, sortutil.Ascending); err == nil {
+        fmt.Printf("ENTRIES (Name sorted by field \"%s\", %s:\n", name, order)
         for _, e := range entries {
-            fmt.Println(e.Name) 
+            fmt.Printf("\t%s\n", e.Name)
         }
     } else {
-        fmt.Println(err.Error())
+        fmt.Printf("ERROR: %s\n", err.Error())
     }
 }
 
