@@ -69,32 +69,32 @@ func main() {
 		entries = append(entries, NewEntry(names[i], ages[i], addresses[i]))
 	}
     sortEntriesCaseInsensitive(entries, "Name", sortutil.Ascending)
-    /*
-      Adam
-      Bob
-      Carol
-      Daniel
-      Eric
-    */
     sortEntriesCaseInsensitive(entries, "NAME", sortutil.Descending)
-    /*
-      Eric
-      Daniel
-      Carol
-      Bob
-      Adam
-    */
     sortEntriesCaseInsensitive(entries, "age", sortutil.Ascending)
-    /*
-      Bob
-      Carol
-      Adam
-      Eric
-      Daniel
-    */
     sortEntriesCaseInsensitive(entries, "dog", sortutil.Ascending)
-    /*
-      error getting values for field "dog" from struct with fields "Name","Age","Address": reflected value is invalid
-    */
 }
+
+/*
+EXPECTED OUTPUT:
+----------------
+ENTRIES (Name sorted by field "Name", Ascending:
+	Adam
+	Bob
+	Carol
+	Daniel
+	Eric
+ENTRIES (Name sorted by field "NAME", Descending:
+	Adam
+	Bob
+	Carol
+	Daniel
+	Eric
+ENTRIES (Name sorted by field "age", Ascending:
+	Bob
+	Carol
+	Adam
+	Eric
+	Daniel
+ERROR: error getting values for field "dog" from struct with fields "Name","Age","Address": reflected value is invalid
+*/
 ```
