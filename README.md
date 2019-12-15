@@ -54,7 +54,7 @@ func NewEntry(name string, age int, addr string) Entry {
 
 func sortEntriesCaseInsensitive(entries []Entry, name string, order sortutil.Order) {
     if err := sortutil.ByCiField(entries, name, sortutil.Ascending); err == nil {
-        fmt.Printf("ENTRIES (Name sorted by field \"%s\", %s:\n", name, order)
+        fmt.Printf("ENTRIES (Name sorted by field \"%s\", %s):\n", name, order)
         for _, e := range entries {
             fmt.Printf("\t%s\n", e.Name)
         }
@@ -77,19 +77,19 @@ func main() {
 /*
 EXPECTED OUTPUT:
 ----------------
-ENTRIES (Name sorted by field "Name", Ascending:
+ENTRIES (Name sorted by field "Name", Ascending):
 	Adam
 	Bob
 	Carol
 	Daniel
 	Eric
-ENTRIES (Name sorted by field "NAME", Descending:
+ENTRIES (Name sorted by field "NAME", Descending):
 	Adam
 	Bob
 	Carol
 	Daniel
 	Eric
-ENTRIES (Name sorted by field "age", Ascending:
+ENTRIES (Name sorted by field "age", Ascending):
 	Bob
 	Carol
 	Adam
