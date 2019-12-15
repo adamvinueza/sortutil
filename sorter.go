@@ -86,9 +86,9 @@ func (s *sorter) Sort() (err error) {
 			switch s.order {
 			default:
 				return invalidOrderForType(s.order, timeType)
-			case ascending:
+			case Ascending:
 				sort.Sort(timeAscending{s})
-			case descending:
+			case Descending:
 				sort.Sort(timeDescending{s})
 			}
 		}
@@ -96,49 +96,49 @@ func (s *sorter) Sort() (err error) {
 		switch s.order {
 		default:
 			return invalidOrderForType(s.order, stringType)
-		case ascending:
+		case Ascending:
 			sort.Sort(stringAscending{s})
-		case descending:
+		case Descending:
 			sort.Sort(stringDescending{s})
-		case ascendingCaseInsensitive:
+		case AscendingCaseInsensitive:
 			sort.Sort(stringInsensitiveAscending{s})
-		case descendingCaseInsensitive:
+		case DescendingCaseInsensitive:
 			sort.Sort(stringInsensitiveDescending{s})
 		}
 	case reflect.Bool:
 		switch s.order {
 		default:
 			return invalidOrderForType(s.order, boolType)
-		case ascending:
+		case Ascending:
 			sort.Sort(boolAscending{s})
-		case descending:
+		case Descending:
 			sort.Sort(boolDescending{s})
 		}
 	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
 		switch s.order {
 		default:
 			return invalidOrderForType(s.order, intType)
-		case ascending:
+		case Ascending:
 			sort.Sort(intAscending{s})
-		case descending:
+		case Descending:
 			sort.Sort(intDescending{s})
 		}
 	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
 		switch s.order {
 		default:
 			return invalidOrderForType(s.order, uintType)
-		case ascending:
+		case Ascending:
 			sort.Sort(intAscending{s})
-		case descending:
+		case Descending:
 			sort.Sort(intDescending{s})
 		}
 	case reflect.Float32, reflect.Float64:
 		switch s.order {
 		default:
 			return invalidOrderForType(s.order, floatType)
-		case ascending:
+		case Ascending:
 			sort.Sort(floatAscending{s})
-		case descending:
+		case Descending:
 			sort.Sort(floatDescending{s})
 		}
 	}

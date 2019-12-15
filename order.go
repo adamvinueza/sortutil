@@ -3,21 +3,21 @@ package sortutil
 type Order int
 
 const (
-    ascending Order = iota
-    descending
-    ascendingCaseInsensitive
-    descendingCaseInsensitive
+	Ascending Order = iota
+	Descending
+	AscendingCaseInsensitive
+	DescendingCaseInsensitive
 )
 
 func (o Order) String() string {
-    orders := [...]string{
-        "Ascending",
-        "Descending",
-        "AscendingCaseInsensitive",
-        "DescendingCaseInsensitive",
-    }
-    if o < ascending || o > descendingCaseInsensitive {
-        return "Unknown"
-    }
-    return orders[o]
+	orders := [...]string{
+		"Ascending",
+		"Descending",
+		"AscendingCaseInsensitive",
+		"DescendingCaseInsensitive",
+	}
+	if o < Ascending || o > DescendingCaseInsensitive {
+		return "Unknown"
+	}
+	return orders[o]
 }

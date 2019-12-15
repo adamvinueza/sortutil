@@ -607,7 +607,7 @@ func TestByField(t *testing.T) {
 			args: args{
 				slice: aa,
 				name:  "B",
-				order: ascending,
+				order: Ascending,
 			},
 			wantErr: false,
 			expectedOrder: []interface{}{
@@ -621,7 +621,7 @@ func TestByField(t *testing.T) {
 			args: args{
 				slice: aa,
 				name:  "dog",
-				order: ascending,
+				order: Ascending,
 			},
 			wantErr: true,
 		},
@@ -630,7 +630,7 @@ func TestByField(t *testing.T) {
 			args: args{
 				slice: aa,
 				name:  "b",
-				order: ascending,
+				order: Ascending,
 			},
 			wantErr: true,
 		},
@@ -639,7 +639,7 @@ func TestByField(t *testing.T) {
 			args: args{
 				slice: aa,
 				name:  " B",
-				order: ascending,
+				order: Ascending,
 			},
 			wantErr: true,
 		},
@@ -673,7 +673,7 @@ func TestByCiField(t *testing.T) {
 			args: args{
 				slice: aa,
 				name:  "B",
-				order: ascending,
+				order: Ascending,
 			},
 			wantErr: false,
 			expectedOrder: []interface{}{
@@ -687,7 +687,7 @@ func TestByCiField(t *testing.T) {
 			args: args{
 				slice: aa,
 				name:  "b",
-				order: ascending,
+				order: Ascending,
 			},
 			wantErr: false,
 			expectedOrder: []interface{}{
@@ -701,7 +701,7 @@ func TestByCiField(t *testing.T) {
 			args: args{
 				slice: aa,
 				name:  "dog",
-				order: ascending,
+				order: Ascending,
 			},
 			wantErr: true,
 		},
@@ -710,7 +710,7 @@ func TestByCiField(t *testing.T) {
 			args: args{
 				slice: aa,
 				name:  " b",
-				order: ascending,
+				order: Ascending,
 			},
 			wantErr: true,
 		},

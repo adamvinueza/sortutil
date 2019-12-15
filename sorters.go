@@ -106,19 +106,19 @@ func Sort(slice interface{}, gtr getter, ord Order) error {
 }
 
 func Asc(slice interface{}) error {
-	return new(slice, nil, ascending).Sort()
+	return new(slice, nil, Ascending).Sort()
 }
 
 func Desc(slice interface{}) error {
-	return new(slice, nil, descending).Sort()
+	return new(slice, nil, Descending).Sort()
 }
 
 func CiAsc(slice interface{}) error {
-	return new(slice, nil, ascendingCaseInsensitive).Sort()
+	return new(slice, nil, AscendingCaseInsensitive).Sort()
 }
 
 func CiDesc(slice interface{}) error {
-	return new(slice, nil, descendingCaseInsensitive).Sort()
+	return new(slice, nil, DescendingCaseInsensitive).Sort()
 }
 
 func ByField(slice interface{}, name string, ord Order) error {

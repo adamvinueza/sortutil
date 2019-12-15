@@ -10,22 +10,22 @@ func TestOrder_String(t *testing.T) {
 	}{
         {
             name: "Asc",
-            o: ascending,
+            o: Ascending,
             want: "Ascending",
         },
         {
             name: "Desc",
-            o: descending,
+            o: Descending,
             want: "Descending",
         },
         {
             name: "AscFold",
-            o: ascendingCaseInsensitive,
+            o: AscendingCaseInsensitive,
             want: "AscendingCaseInsensitive",
         },
         {
             name: "DescFold",
-            o: descendingCaseInsensitive,
+            o: DescendingCaseInsensitive,
             want: "DescendingCaseInsensitive",
         },
 	}
