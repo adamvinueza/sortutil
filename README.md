@@ -1,7 +1,7 @@
 # sortutil
 
 This is a fork of Patrick Mylund Nielsen's `sortutil` package. Its chief use
-case is to sort structs by arbitrary field names.
+case, for my purposes, is to sort structs by arbitrary field names.
 
 ## Rationale
 When returning JSON representing the results of queries against a database, it's
