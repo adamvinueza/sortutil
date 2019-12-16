@@ -1,7 +1,16 @@
 # sortutil
 
-This is a fork of Patrick Mylund Nielsen's `sortutil` package. Its chief use
-case, for my purposes, is to sort structs by arbitrary field names.
+This is a fork of Patrick Mylund Nielsen's `sortutil` package.
+
+Its purpose is to enable sorting with greater flexibility than is allowed by
+Go's built-in `sort` package. It is a _lot_ slower than Go's built-in sorting,
+because it relies upon reflection. Its two major use cases are sorting slices of
+structs: either by values of arbitrary named fields, or by values of indexed
+fields.
+
+Sorting of string values allows for ignoring case. Also, sorting by named fields
+allows for ignoring case. (In that situation, your struct obviously should not
+have fields whose names differ only in case.)
 
 ## Rationale
 When returning JSON representing the results of queries against a database, it's
@@ -13,19 +22,34 @@ just retrieve the cached rows, sort them appropriately, and return the results.
 The rows are represented in our cache as slices of structs, so we need to be
 able to sort by struct field names.
 
-## Why Fork?
-Forking this package was necessary for two reasons. First, Nielsen's package
-causes a runtime panic when sorting a struct by a field whose name is not found,
-but we don't want to have to put in recovery code just so we can sort our data.
-Second, it is common to ignore case when querying database tables and columns:
-"SELECT col FROM mytable" should query the same data as "SELECT COL FROM
-MYTABLE". Nielsen's package does not permit selecting struct field names in a
-case-insensitive manner. There's a good reason for this: struct field names are
-case sensitive! But our primary use case is JSON deserialization of rows from
-database tables, and allowing for case-insensitive search respects this.
-
 ## Usage
 
+To sort a struct by a field name:
+```Go
+import "sortutil"
+
+type Entry struct {
+    Name string
+    Age int
+    Address string
+}
+
+var entries []Entry{
+    Entry{ Name: "Bob", Age: 21, Address: "100 Main St" },
+    Entry{ Name: "Carol", Age: 22, Address: "200 Main St"},
+}
+
+err := sortutil.ByField(entries, "Name", Descending)
+// Carol, Bob
+err = sortutil.ByField(entries, "Age", Ascending)
+// Bob, Carol
+err = sortutil.ByCiField(entries, "address", Descending)
+// Carol, Bob
+err = sortutil.ByField(entries, "dog", Ascending)
+// err is not nil
+```
+
+## Sample Program
 ```Go
 package main
 
@@ -56,7 +80,7 @@ func NewEntry(name string, age int, addr string) Entry {
 
 func sortEntriesCaseInsensitive(entries []Entry, name string, order sortutil.Order) {
     if err := sortutil.ByCiField(entries, name, order); err == nil {
-        fmt.Printf("ENTRIES (Name sorted by field \"%s\", %s):\n", name, order)
+        fmt.Printf("ENTRIES (entry.Name sorted by field \"%s\", %s):\n", name, order)
         for _, e := range entries {
             fmt.Printf("\t%s\n", e.Name)
         }
@@ -79,19 +103,19 @@ func main() {
 /*
 EXPECTED OUTPUT:
 ----------------
-ENTRIES (Name sorted by field "Name", Ascending):
+ENTRIES (entry.Name sorted by field "Name", Ascending):
 	Adam
 	Bob
 	Carol
 	Daniel
 	Eric
-ENTRIES (Name sorted by field "NAME", Descending):
+ENTRIES (entry.Name sorted by field "NAME", Descending):
 	Eric
 	Daniel
 	Carol
 	Bob
 	Adam
-ENTRIES (Name sorted by field "age", Ascending):
+ENTRIES (entry.Name sorted by field "age", Ascending):
 	Bob
 	Carol
 	Adam
