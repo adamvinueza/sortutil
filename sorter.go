@@ -21,7 +21,7 @@ func invalidOrderForType(o Order, dtype string) error {
 }
 
 var (
-	time_type = reflect.TypeOf(time.Time{})
+	typeOfTime = reflect.TypeOf(time.Time{})
 )
 
 type sorter struct {
@@ -34,10 +34,12 @@ type sorter struct {
 	valType  reflect.Type
 }
 
+// Len returns the number of items to be sorted.
 func (s *sorter) Len() int {
 	return len(s.vals)
 }
 
+// Swap performs a swap operation two items.
 func (s *sorter) Swap(i, j int) {
 	x := s.slice.Index(i)
 	y := s.slice.Index(j)
@@ -82,7 +84,7 @@ func (s *sorter) Sort() (err error) {
 		switch s.valType {
 		default:
 			return fmt.Errorf("cannot sort by type %v", s.valType)
-		case time_type:
+		case typeOfTime:
 			switch s.order {
 			default:
 				return invalidOrderForType(s.order, timeType)
