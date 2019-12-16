@@ -15,8 +15,8 @@ able to sort by struct field names.
 
 ## Why Fork?
 Forking this package was necessary for two reasons. First, Nielsen's package
-causes a runtime panic when sorting a struct by a field whose name is not found;
-we don't want to have to put in recovery code just so we can sort our data.
+causes a runtime panic when sorting a struct by a field whose name is not found,
+but we don't want to have to put in recovery code just so we can sort our data.
 Second, it is common to ignore case when querying database tables and columns:
 "SELECT col FROM mytable" should query the same data as "SELECT COL FROM
 MYTABLE". Nielsen's package does not permit selecting struct field names in a
