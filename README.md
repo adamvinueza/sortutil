@@ -4,7 +4,7 @@ This is a fork of Patrick Mylund Nielsen's `sortutil` package. Its chief use
 case is to sort structs by arbitrary field names.
 
 ## Rationale
-When return JSON representing the results of queries against a database, it's
+When returning JSON representing the results of queries against a database, it's
 normal to return an array of JSON objects representing database rows. These rows
 can be sorted by arbitrary column names, but if we want to sort the data in
 variable ways, we should not have to repeatedly call the database and have it
