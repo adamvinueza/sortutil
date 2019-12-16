@@ -20,7 +20,9 @@ but we don't want to have to put in recovery code just so we can sort our data.
 Second, it is common to ignore case when querying database tables and columns:
 "SELECT col FROM mytable" should query the same data as "SELECT COL FROM
 MYTABLE". Nielsen's package does not permit selecting struct field names in a
-case-insensitive manner.
+case-insensitive manner. There's a good reason for this: struct field names are
+case sensitive! But our primary use case is JSON deserialization of rows from
+database tables, and allowing for case-insensitive search respects this.
 
 ## Usage
 
